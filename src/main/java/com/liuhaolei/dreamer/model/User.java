@@ -37,12 +37,25 @@ public class User extends Model<User> {
     private Date createAt;
     @TableField("update_at")
     private Date updateAt;
+    @TableField("male")
+    private String male;
 
 
     @Override
     protected Serializable pkVal() {
         return this.id;
     }
+
+	public String getMale() {
+		return male;
+	}
+
+
+
+	public void setMale(String male) {
+		this.male = male;
+	}
+
 
 
 	public Integer getId() {

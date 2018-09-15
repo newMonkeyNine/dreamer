@@ -57,6 +57,11 @@ public class ResponseModel {
 		this.timestamp = timestamp;
 	}
 
+	public ResponseModel(String msg) {
+		super();
+		this.msg = msg;
+		this.timestamp = System.currentTimeMillis();;
+	}
 	
 	public ResponseModel(ResultStatus resultStatus, Object data, Long timestamp) {
 		super();

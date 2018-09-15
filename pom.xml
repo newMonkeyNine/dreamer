@@ -7,7 +7,6 @@
 	<artifactId>dreamer</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
-	
 
 	<name>dreamer</name>
 	<description>Demo project for Spring Boot</description>
@@ -87,13 +86,27 @@
             <artifactId>aspectjweaver</artifactId>
             <version>1.8.8</version>
         </dependency>
+        
+        <!-- 加密算法 -->
+        <dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.10</version>
+		</dependency>
 	</dependencies>
-
+	
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>build-info</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

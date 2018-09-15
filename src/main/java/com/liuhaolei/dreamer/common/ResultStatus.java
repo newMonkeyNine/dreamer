@@ -3,6 +3,7 @@ package com.liuhaolei.dreamer.common;
 public enum ResultStatus {
 	
 	SUCCESS("200", "操作成功"),
+	EMPTY_DATA("400", "暂时没有数据"),
 	PARAMS_EMPTY("401", "参数错误");
 	
 	private String code;

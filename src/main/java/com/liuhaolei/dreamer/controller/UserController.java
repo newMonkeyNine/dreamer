@@ -1,20 +1,16 @@
 package com.liuhaolei.dreamer.controller;
 
 
-import java.util.Date;
-
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.bind.annotation.RestController;
 
 import com.liuhaolei.dreamer.common.ResponseModel;
 import com.liuhaolei.dreamer.common.ResultStatus;
 import com.liuhaolei.dreamer.common.user.UserReq;
-import com.liuhaolei.dreamer.model.User;
 import com.liuhaolei.dreamer.service.UserService;
 
 /**
@@ -38,22 +34,27 @@ public class UserController {
 	 */
 	@PostMapping("/regist.api")
 	public ResponseModel registUser(@RequestBody UserReq.userModel userModel) {
-//		
-//		if(StringUtils.isBlank(userModel.getMale()) || StringUtils.isBlank(userModel.getUserName()) 
-//				|| StringUtils.isBlank(userModel.getPassWord())) {
-//			return ResponseModel.failApi(ResultStatus.PARAMS_EMPTY);
-//		}
 		
-		User user = new User();
+		if( StringUtils.isBlank(userModel.getUserName()) 
+				|| StringUtils.isBlank(userModel.getPassWord())) {
+			return ResponseModel.failApi(ResultStatus.PARAMS_EMPTY);
+		}
 		
-		user.setUserName("liuhaolei");
-		user.setPassWord("123456");
-		user.setCreateAt(new Date());
-		user.setUpdateAt(new Date());
-		userService.insert(user);
-		return ResponseModel.successApi(ResultStatus.SUCCESS, null);
+		return userService.saveUser(userModel);
 	}
 	
-
+	/**
+	 * 新用户进行登陆O
+	 * @return
+	 */
+	@PostMapping("/login.api")
+	public ResponseModel loginUser(@RequestBody UserReq.userModel userModel) {
+		
+		if(StringUtils.isBlank(userModel.getUserName()) || StringUtils.isBlank(userModel.getPassWord())) {
+			return ResponseModel.failApi(ResultStatus.PARAMS_EMPTY);
+		}
+		
+		return userService.logingUser(userModel);
+	}
 }
 
