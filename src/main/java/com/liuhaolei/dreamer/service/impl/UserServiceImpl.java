@@ -12,7 +12,7 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.liuhaolei.dreamer.common.CommonString;
 import com.liuhaolei.dreamer.common.ResponseModel;
 import com.liuhaolei.dreamer.common.ResultStatus;
-import com.liuhaolei.dreamer.common.user.UserReq.userModel;
+import com.liuhaolei.dreamer.common.req.UserReq.userModel;
 import com.liuhaolei.dreamer.mapper.UserMapper;
 import com.liuhaolei.dreamer.model.User;
 import com.liuhaolei.dreamer.service.UserService;
@@ -34,15 +34,25 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
 	@Override
 	public ResponseModel saveUser(userModel userModel) {
-		User user = new User();
-		user.setUserName(userModel.getUserName().trim());
+	
 		String newPassword = userModel.getPassWord().trim();
 		String encPassword = EncryptionUtil.md5(newPassword + CommonString.SALT);
-		user.setPassWord(encPassword);
 		
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("user_name", userModel.getUserName());
+		params.put("pass_word", userModel.getPassWord());
+		List<User> userList = userMapper.selectByMap(params);
+		if(userList != null || userList.size() >= 0) {
+			return ResponseModel.failApi(ResultStatus.ALREADY_REGISTERED);
+		}
+		
+		User user = new User();
+		user.setUserName(userModel.getUserName().trim());
 		user.setMale(userModel.getMale());
+		user.setPassWord(encPassword);
 		user.setCreateAt(new Date());
 		user.setUpdateAt(new Date());
+		
 		userMapper.insert(user);
 		return ResponseModel.successApi(ResultStatus.SUCCESS, null);
 	}

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.liuhaolei.dreamer.common.ResponseModel;
 import com.liuhaolei.dreamer.common.ResultStatus;
-import com.liuhaolei.dreamer.common.user.UserReq;
+import com.liuhaolei.dreamer.common.req.UserReq;
 import com.liuhaolei.dreamer.service.UserService;
 
 /**

@@ -4,7 +4,9 @@ public enum ResultStatus {
 	
 	SUCCESS("200", "操作成功"),
 	EMPTY_DATA("400", "暂时没有数据"),
+	ALREADY_REGISTERED("1001", "您已注册"),
 	PARAMS_EMPTY("401", "参数错误");
+	
 	
 	private String code;
 	
