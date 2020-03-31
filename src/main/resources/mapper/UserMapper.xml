@@ -15,5 +15,9 @@
     <sql id="Base_Column_List">
         id, user_name, pass_word, create_at, update_at
     </sql>
+	
+	   <sql id="Base_Column_List3">
+        id, user_name, pass_word, create_at, update_at
+    </sql>
 
 </mapper>
